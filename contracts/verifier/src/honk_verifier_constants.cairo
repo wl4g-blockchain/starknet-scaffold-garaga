@@ -3,7 +3,7 @@ use garaga::utils::noir::HonkVk;
 
 // _vk_hash = keccak256(vk_bytes)
 // vk_hash = hades_permutation(_vk_hash.low, _vk_hash.high, 2)
-pub const VK_HASH: felt252 = 0x3672c916bc2861e4e85080546e8693744660d836a06859790c0d775c7e90a9b;
+pub const VK_HASH: felt252 = 0x57c75cec2fae053755a99cf4d25a532206e9e5d533dfd4cede784c8e5212cca;
 pub const vk: HonkVk = HonkVk {
     circuit_size: 4096,
     log_circuit_size: 12,
@@ -11,15 +11,15 @@ pub const vk: HonkVk = HonkVk {
     public_inputs_offset: 1,
     qm: G1Point {
         x: u384 {
-            limb0: 0xd93b70bed2724e7b1c71dc9e,
-            limb1: 0x53296549241f9377f8581269,
-            limb2: 0x1208635a70289564,
+            limb0: 0x2a701f56bc3c72ff5bac6805,
+            limb1: 0x66ecd82403a9df1ed103d9c6,
+            limb2: 0xd88b49afc72c8fd,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0xfd13d0c8f5887f0594c63669,
-            limb1: 0x85adce48c9563a7423322a73,
-            limb2: 0x116a3936704da2d4,
+            limb0: 0x8b2dadb21d8cb23b544403ab,
+            limb1: 0x8edef239f9e616918f36ba3a,
+            limb2: 0x78c305cfc93426a,
             limb3: 0x0,
         },
     },
@@ -67,15 +67,15 @@ pub const vk: HonkVk = HonkVk {
     },
     qo: G1Point {
         x: u384 {
-            limb0: 0x35e1eb0144e574db9abc4dd8,
-            limb1: 0x1d1fc420297a9a2e04d04053,
-            limb2: 0xe2e489df6a14e3e,
+            limb0: 0x123693c33722c048a5dae9e3,
+            limb1: 0xae9913614c51486cc7c30959,
+            limb2: 0x26bd77008d3e0258,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0x6185476309f49adc5ec4d1dd,
-            limb1: 0x18665356dd825ff9fa5ea3ed,
-            limb2: 0x7d6bbcf4d83cff3,
+            limb0: 0x9515ad22fac355785dbb01b0,
+            limb1: 0xdd2293530cb5e241870321fa,
+            limb2: 0x2cce92bb6c3cebbc,
             limb3: 0x0,
         },
     },
@@ -109,15 +109,15 @@ pub const vk: HonkVk = HonkVk {
     },
     qArith: G1Point {
         x: u384 {
-            limb0: 0xcf1fad129af51a92cd641749,
-            limb1: 0xcb47ec8427fa2105de95d660,
-            limb2: 0xe710c3e8fa66750,
+            limb0: 0xa72eeca13704c71377248c5e,
+            limb1: 0xb729eaa4ff2aec68bca72f2b,
+            limb2: 0x242bebe8768e1b4b,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0xf65b0bdd6496e131ba203c55,
-            limb1: 0xa8bef04783e03d6cee8a8c30,
-            limb2: 0x24e8061804314ddc,
+            limb0: 0xadb6dc19a7fadf13ca7e856a,
+            limb1: 0x1832dbecd292353ca630ad8,
+            limb2: 0x231940cbad85f22,
             limb3: 0x0,
         },
     },
@@ -193,71 +193,71 @@ pub const vk: HonkVk = HonkVk {
     },
     s1: G1Point {
         x: u384 {
-            limb0: 0x1d068bc22efbaa45b229d50e,
-            limb1: 0xbb1f260d05037ffa2d5f9ff,
-            limb2: 0x287d13fcda26c48b,
+            limb0: 0xb42ade4b6d900ef52ef90332,
+            limb1: 0xc0ea0b2c6b054fff543a428a,
+            limb2: 0x2ad1f86e0a3a2412,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0xfe7a9392704d3b8f447a3a42,
-            limb1: 0x9e3b6b527db18f99fa635c24,
-            limb2: 0x216d8dfcaa6d5fd,
+            limb0: 0xf59d70bbdfa4817cecbc0886,
+            limb1: 0x10a177b550dda758bd2241d3,
+            limb2: 0x10b3f72b770e0d9a,
             limb3: 0x0,
         },
     },
     s2: G1Point {
         x: u384 {
-            limb0: 0xe36a1e03cb833f43a245a1ef,
-            limb1: 0x75617e900af3632408f65424,
-            limb2: 0x5094c5433394814,
+            limb0: 0xcf03bd8e3a985fdc6a7171,
+            limb1: 0xb9c3ff0db8b582bf3b1f3c2c,
+            limb2: 0x159b0b23a5db9daf,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0x50b4864b8ef0dff1fdf20cdb,
-            limb1: 0x4a6d479eb12718140f96d8b5,
-            limb2: 0x2f7013922b53d3a2,
+            limb0: 0x5ede58fea96648bc8c15e965,
+            limb1: 0x58c0cdb8ce28949fd886cc4e,
+            limb2: 0x8efa3329fc1a111,
             limb3: 0x0,
         },
     },
     s3: G1Point {
         x: u384 {
-            limb0: 0x5529ead61158296cfa47f25e,
-            limb1: 0x45221299b8fd932ca1774f43,
-            limb2: 0x1025d8b978868db8,
+            limb0: 0xe5ceb8c83082adb895ecd58,
+            limb1: 0x238a1d4b91643c405dcfc1c9,
+            limb2: 0x18b2cc7f576193ef,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0x50ade79fc7d6728607444ef6,
-            limb1: 0x527ac455ef5d3191737d8915,
-            limb2: 0x394e620db0b96d6,
+            limb0: 0xd05637818060751a5bc695ba,
+            limb1: 0xb6db96d36f7f9d9612b03dcc,
+            limb2: 0x21299cdc46aa93dd,
             limb3: 0x0,
         },
     },
     s4: G1Point {
         x: u384 {
-            limb0: 0xcd9f4da1adbb4eb263ea2065,
-            limb1: 0x21687048a0ed449c0416efaf,
-            limb2: 0x90a5e98f0f54d8,
+            limb0: 0x63e14ab8d150eff9cff4ea5e,
+            limb1: 0x3216b30f1921117e80928b76,
+            limb2: 0x626a9c29a3f021d,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0x6ebea80bf06f93f7a660a8ee,
-            limb1: 0x2c1261f990fb8c5ab72540ca,
-            limb2: 0x1aa3ca60381e96ae,
+            limb0: 0xf3fce7488a4f38bac46f25ec,
+            limb1: 0x22a388a93856f63aca5b676,
+            limb2: 0x2f79dcaa47efa941,
             limb3: 0x0,
         },
     },
     id1: G1Point {
         x: u384 {
-            limb0: 0x3efb1aefcfbe475d43d16bce,
-            limb1: 0x12ad49876e65f9bfeb812d39,
-            limb2: 0x23bd8229bd24116d,
+            limb0: 0x129e48be284095dbb9b26b48,
+            limb1: 0xd7fdac3a12f404379068d643,
+            limb2: 0x1384959bf5eed8f6,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0x60efe1bbdb1c42e1f0807cfd,
-            limb1: 0x66403aa2b566c907bc733c73,
-            limb2: 0x2ddbdeee1f588dc5,
+            limb0: 0x474d4e085846431d91eb89f9,
+            limb1: 0x603e61a359b63958f91e5735,
+            limb2: 0x1f0fab57ec870eb,
             limb3: 0x0,
         },
     },
@@ -291,15 +291,15 @@ pub const vk: HonkVk = HonkVk {
     },
     id4: G1Point {
         x: u384 {
-            limb0: 0xdf751f6776b268e84f4f3768,
-            limb1: 0xd816d1176c8ad3752b86188e,
-            limb2: 0xa7bad3b189391c4,
+            limb0: 0x665f703292ea2e1c14a58871,
+            limb1: 0xfe66741e37aeda2723ab4786,
+            limb2: 0xe24789dfdc4cae5,
             limb3: 0x0,
         },
         y: u384 {
-            limb0: 0x650b6352c0deb1f7affd1d6d,
-            limb1: 0x56d960d236fa73800a531e52,
-            limb2: 0x892a913f320741d,
+            limb0: 0x73e84e97708e2f5490b9870f,
+            limb1: 0xa874c353e69130ab0c39794,
+            limb2: 0xb8ccb4ca448f5c3,
             limb3: 0x0,
         },
     },

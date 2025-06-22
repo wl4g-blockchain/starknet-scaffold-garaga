@@ -1,3 +1,4 @@
 fn main(x: Field, y: pub Field) {
-    assert(x != y);
+    let yy = y * y;
+    assert(x != yy);
 }
