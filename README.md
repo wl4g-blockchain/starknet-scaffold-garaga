@@ -112,6 +112,13 @@ Prepare the app and its requirements so you can run it. Go to the `app` folder a
 1. Build the app with `bun run build`
 1. Finally we can run the app: `bun run dev`
 
+## Screenshots of DApp Effects
+
+[More Step-by-Step Documention here](https://www.notion.so/Build-of-Hello-ZKP-DApp-PoC-21a86f8b584b806b87dbddefef699b23?pvs=97#21c86f8b584b807b965ef3bdbe139bcf)
+
+![](./docs/shots/verified-passed.webp)
+![](./docs/shots/verified-failure.webp)
+
 ## Useful links
 
 - Noir quickstart https://noir-lang.org/docs/getting_started/quick_start
