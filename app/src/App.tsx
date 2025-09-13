@@ -129,13 +129,13 @@ function App() {
 
       // TODO: use conract address from the result of the `make deploy-verifier` step
       // The contract on Starknet locally.
-      //const provider = new RpcProvider({ nodeUrl: 'http://127.0.0.1:5050/rpc' });
-      //const contractAddress = '0x0486249e635381baff30e1ee12f99cb95a2ada789f68c708d7fdda28bd0a1a23';
+      const provider = new RpcProvider({ nodeUrl: 'http://127.0.0.1:5050/rpc' });
+      const contractAddress = '0x02f0e0c971d450a1580edf65edbf6e9a2d2a537361f3967f4fec0e602bf20c3c';
 
       // The contract on Starknet Sepolia.
-      const provider = new RpcProvider({ nodeUrl: 'https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_8/hWvw1XMZRZY4oNd6EvHgk' });
       // see:https://sepolia.starkscan.co/contract/0x03cbf1e181cf9f7b126db7d97a4a8f80818cb13dae1c2068df022635e2127fa3#overview
-      const contractAddress = '0x03cbf1e181cf9f7b126db7d97a4a8f80818cb13dae1c2068df022635e2127fa3';
+    //   const provider = new RpcProvider({ nodeUrl: 'https://starknet-sepolia.g.alchemy.com/starknet/version/rpc/v0_8/hWvw1XMZRZY4oNd6EvHgk' });
+    //   const contractAddress = '0x03cbf1e181cf9f7b126db7d97a4a8f80818cb13dae1c2068df022635e2127fa3';
 
       const verifierContract = new Contract(verifierAbi, contractAddress, provider);
       

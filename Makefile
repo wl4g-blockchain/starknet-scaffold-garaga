@@ -26,6 +26,7 @@ devnet:
 	starknet-devnet --accounts=2 --seed=0 --initial-balance=100000000000000000000000
 
 accounts-file:
+	# Must be 'alpah-sepolia' and see:https://github.com/foundry-rs/starknet-foundry/blob/437d128b4f54847666ea8021530d237f6bf47866/crates/sncast/src/lib.rs#L237-L238
 	curl -s http://localhost:5050/predeployed_accounts | jq '{"alpha-sepolia": {"devnet0": {address: .[0].address, private_key: .[0].private_key, public_key: .[0].public_key, class_hash: "0xe2eb8f5672af4e6a4e8a8f1b44989685e668489b0a25437733756c5a34a1d6", deployed: true, legacy: false, salt: "0x14", type: "open_zeppelin"}}}' > ./contracts/accounts.json
 
 build-circuit:
@@ -47,11 +48,18 @@ build-verifier:
 	cd contracts/verifier && scarb build
 
 declare-verifier:
+	cd contracts && sncast --profile devnet declare --contract-name UltraStarknetHonkVerifier
+
+declare-verifier-sepolia:
 	cd contracts && sncast --profile sepolia declare --contract-name UltraStarknetHonkVerifier
 
 deploy-verifier:
-	# TODO: use class hash from the result of the `make declare-verifier` step
-	cd contracts && sncast --profile sepolia deploy --salt 0xaabb --class-hash 0x004d13e14caa3b225b07595e7edcade77ce849e30ee7908bf4b2e4446d652ebf
+	# TODO: Should be using the class hash from the return result of the `make declare-verifier` step
+	cd contracts && sncast --profile devnet deploy --salt 0xaabb --class-hash 0x07559cf52f60da95b96f958c843732878a6cc348bcc33f49304da646fa07feea
+
+deploy-verifier-sepolia:
+	# TODO: Should be using the class hash from the return result of the `make declare-verifier-sepolia` step
+	cd contracts && sncast --profile devnet deploy --salt 0xaabb --class-hash 0x004d13e14caa3b225b07595e7edcade77ce849e30ee7908bf4b2e4446d652ebf
 
 artifacts:
 	cp ./circuit/target/circuit.json ./app/src/assets/circuit.json
