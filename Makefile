@@ -44,18 +44,38 @@ gen-vk:
 gen-verifier:
 	cd contracts && garaga gen --system ultra_starknet_honk --vk ../circuit/target/vk --project-name verifier
 
+gen-verifier-starknet-zk:
+	cd contracts && garaga gen --system ultra_starknet_zk_honk --vk ../circuit/target/vk --project-name verifier
+
+gen-verifier-keccak-zk:
+	cd contracts && garaga gen --system ultra_keccak_zk_honk --vk ../circuit/target/vk --project-name verifier
+
 build-verifier:
 	cd contracts/verifier && scarb build
 
 declare-verifier:
 	cd contracts && sncast --profile devnet declare --contract-name UltraStarknetHonkVerifier
 
+declare-verifier-starknet-zk:
+	cd contracts && sncast --profile devnet declare --contract-name UltraStarknetZKHonkVerifier
+
+declare-verifier-keccak-zk:
+	cd contracts && sncast --profile devnet declare --contract-name UltraKeccakZKHonkVerifier
+
 declare-verifier-sepolia:
 	cd contracts && sncast --profile sepolia declare --contract-name UltraStarknetHonkVerifier
 
+# Note: Only barretenberg-v1.2.1 was supported Starknet ZK mode to proof.
+# https://github.com/wl4g-blockchain/zkp-barretenberg/blob/v1.2.1/barretenberg/cpp/src/barretenberg/dsl/acir_proofs/c_bind.cpp#L216-L217
+declare-verifier-sepolia-starknet-zk:
+	cd contracts && sncast --profile sepolia declare --contract-name UltraStarknetZKHonkVerifier
+
+declare-verifier-sepolia-keccak-zk:
+	cd contracts && sncast --profile sepolia declare --contract-name UltraKeccakZKHonkVerifier
+
 deploy-verifier:
 	# TODO: Should be using the class hash from the return result of the `make declare-verifier` step
-	cd contracts && sncast --profile devnet deploy --salt 0xaabb --class-hash 0x07559cf52f60da95b96f958c843732878a6cc348bcc33f49304da646fa07feea
+	cd contracts && sncast --profile devnet deploy --salt 0xaabb --class-hash 0x04789fd76a79b3e7441bef841e497491d7cb3eced37b6a0d623b337def582b2c
 
 deploy-verifier-sepolia:
 	# TODO: Should be using the class hash from the return result of the `make declare-verifier-sepolia` step
@@ -65,6 +85,16 @@ artifacts:
 	cp ./circuit/target/circuit.json ./app/src/assets/circuit.json
 	cp ./circuit/target/vk ./app/src/assets/vk.bin
 	cp ./contracts/target/release/verifier_UltraStarknetHonkVerifier.contract_class.json ./app/src/assets/verifier.json
+
+artifacts-starknet-zk:
+	cp ./circuit/target/circuit.json ./app/src/assets/circuit.json
+	cp ./circuit/target/vk ./app/src/assets/vk.bin
+	cp ./contracts/target/release/verifier_UltraStarknetZKHonkVerifier.contract_class.json ./app/src/assets/verifier.json
+
+artifacts-keccak-zk:
+	cp ./circuit/target/circuit.json ./app/src/assets/circuit.json
+	cp ./circuit/target/vk ./app/src/assets/vk.bin
+	cp ./contracts/target/release/verifier_UltraKeccakZKHonkVerifier.contract_class.json ./app/src/assets/verifier.json
 
 run-app:
 	cd app && bun run dev

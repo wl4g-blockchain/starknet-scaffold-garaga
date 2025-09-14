@@ -4,7 +4,7 @@ import { ProofState, ProofStateData } from './types'
 import { Noir } from "@noir-lang/noir_js";
 import { UltraHonkBackend } from "@aztec/bb.js";
 import { flattenFieldsAsArray } from "./helpers/proof";
-import { getHonkCallData, init } from 'garaga';
+import { getHonkCallData, getZKHonkCallData, init } from 'garaga';
 import { bytecode, abi } from "./assets/circuit.json";
 import { abi as verifierAbi } from "./assets/verifier.json";
 import vkUrl from './assets/vk.bin?url';
@@ -97,15 +97,16 @@ function App() {
       const input = { x: inputX, y: inputY };
       
       // Generate witness
-      let noir = new Noir({ bytecode, abi: abi as any });
-      let execResult = await noir.execute(input);
+      const noir = new Noir({ bytecode, abi: abi as any });
+      const execResult = await noir.execute(input);
       console.log(execResult);
       
       // Generate proof
       updateState(ProofState.GeneratingProof);
 
-      let honk = new UltraHonkBackend(bytecode, { threads: 2 });
-      let proof = await honk.generateProof(execResult.witness, { starknet: true });
+      const honk = new UltraHonkBackend(bytecode, { threads: 2 });
+    //   const proof = await honk.generateProof(execResult.witness, { starknet: true });
+      const proof = await honk.generateProof(execResult.witness, { keccakZK: true });
       honk.destroy();
       console.log(proof);
       
@@ -113,11 +114,23 @@ function App() {
       updateState(ProofState.PreparingCalldata);
 
       await init();
-      const callData = getHonkCallData(
+
+      // Use Starknet non-zk mode
+    //   const callData = getHonkCallData(
+    //     proof.proof,
+    //     flattenFieldsAsArray(proof.publicInputs),
+    //     vk as Uint8Array,
+    //     1 // HonkFlavor.STARKNET
+    //   );
+
+      // Use the Keccak ZK mode
+      // grep -Rl 'Consistency check failed' .
+      // ./zkp-starknet-garaga-v0.18.1/tools/garaga_rs/src/calldata/full_proof_with_hints/zk_honk.rs 
+      const callData = getZKHonkCallData(
         proof.proof,
         flattenFieldsAsArray(proof.publicInputs),
         vk as Uint8Array,
-        1 // HonkFlavor.STARKNET
+        0 // HonkFlavor.KECCAK
       );
       console.log(callData);
       
@@ -130,7 +143,7 @@ function App() {
       // TODO: use conract address from the result of the `make deploy-verifier` step
       // The contract on Starknet locally.
       const provider = new RpcProvider({ nodeUrl: 'http://127.0.0.1:5050/rpc' });
-      const contractAddress = '0x02f0e0c971d450a1580edf65edbf6e9a2d2a537361f3967f4fec0e602bf20c3c';
+      const contractAddress = '0x045e11f6c31d24f63fc2c6a8a9ddac8b067c2d94777d1765d1f44a9308ce9eaa';
 
       // The contract on Starknet Sepolia.
       // see:https://sepolia.starkscan.co/contract/0x03cbf1e181cf9f7b126db7d97a4a8f80818cb13dae1c2068df022635e2127fa3#overview
@@ -140,7 +153,12 @@ function App() {
       const verifierContract = new Contract(verifierAbi, contractAddress, provider);
       
       // Check verification
-      const res = await verifierContract.verify_ultra_starknet_honk_proof(callData.slice(1));
+    //   const res = await verifierContract.verify_ultra_starknet_honk_proof(callData.slice(1));
+
+      // Note: Only barretenberg-v1.2.1 was supported Starknet ZK mode to proof.
+      // https://github.com/wl4g-blockchain/zkp-barretenberg/blob/v1.2.1/barretenberg/cpp/src/barretenberg/dsl/acir_proofs/c_bind.cpp#L216-L217
+    //   const res = await verifierContract.verify_ultra_starknet_zk_honk_proof(callData.slice(1));
+      const res = await verifierContract.verify_ultra_keccak_zk_honk_proof(callData.slice(1));
       console.log(res);
 
       updateState(ProofState.ProofVerified);
